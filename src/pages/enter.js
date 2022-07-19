@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { useContext } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { UserContext } from "~/lib/context";
-import { auth, googleAuthProvider } from "~/lib/firebase";
+import { auth, googleAuthProvider, firestore } from "~/lib/firebase";
+import debounce from "lodash.debounce";
+import UsernameForm from "~/components/UsernameForm";
 
 function EnterPage() {
   const { user, username } = useContext(UserContext);
@@ -48,6 +50,6 @@ function SignOutButton() {
 }
 
 // form
-function UsernameForm() {}
+// function UsernameForm() {}
 
 export default EnterPage;
