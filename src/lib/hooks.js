@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 import { auth, firestore } from "./firebase";
 
+// Từ [google user Object] đâm vào firestore database collection users để tìm document
+// bằng uid, có thì setUsername không có thì set là null
 // Custom hook to read  auth record and user profile doc
 export function useUserData() {
   const [user] = useAuthState(auth);
