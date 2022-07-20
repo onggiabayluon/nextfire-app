@@ -2,9 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 import { UserContext } from "~/lib/context";
+import { auth } from "~/lib/firebase";
 
 function Navbar() {
   const { user, username } = useContext(UserContext);
+
+  const logout = (e) => {
+    e.preventDefault();
+    auth.signOut();
+  };
 
   return (
     <nav className="navbar">
@@ -25,8 +31,24 @@ function Navbar() {
             </li>
             <li>
               <Link href={`/${username}`}>
-                <img src={user?.photoURL} alt={username} />
+                <div>
+                  {user?.photoURL ? (
+                    <Image
+                      src={user?.photoURL}
+                      alt={username}
+                      width={50}
+                      height={50}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </Link>
+            </li>
+            <li>
+              <button style={{ marginLeft: "10px" }} onClick={logout}>
+                Sign Out
+              </button>
             </li>
           </>
         )}

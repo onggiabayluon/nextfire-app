@@ -2,6 +2,7 @@ import { useState } from "react";
 import { firestore, postToJSON, fromMillis } from "~/lib/firebase";
 import PostFeed from "~/components/PostFeed";
 import Loader from "~/components/Loader";
+import MetaTags from "~/components/MetaTags";
 
 const LIMIT = 3;
 export async function getServerSideProps(context) {
@@ -52,6 +53,7 @@ export default function Home(props) {
 
   return (
     <main>
+      <MetaTags title="Cool Next App" />
       <PostFeed posts={posts} />
 
       {!loading && !postsEnd && (
