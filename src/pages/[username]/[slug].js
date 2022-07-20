@@ -1,7 +1,16 @@
-import { firestore, getUserWithUsername, postToJSON } from "~/lib/firebase";
+import {
+  firestore,
+  getUserWithUsername,
+  postToJSON,
+  auth,
+} from "~/lib/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import PostContent from "~/components/PostContent";
 import styles from "~/components/styles/Post.module.css";
+import MetaTags from "~/components/MetaTags";
+import AuthCheck from "~/components/AuthCheck";
+import HeartButton from "~/components/HeartButton";
+import Link from "next/link";
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
@@ -54,6 +63,7 @@ function PostPage(props) {
 
   return (
     <main className={styles.container}>
+      <MetaTags title={post.title} />
       <section>
         <PostContent post={post} />
       </section>
@@ -62,6 +72,22 @@ function PostPage(props) {
         <p>
           <strong>{post.heartCount || 0} 🤍</strong>
         </p>
+
+        <AuthCheck
+          fallback={
+            <Link href="/enter">
+              <button>💗 Sign Up</button>
+            </Link>
+          }
+        >
+          <HeartButton postRef={postRef} />
+        </AuthCheck>
+
+        {auth.currentUser?.uid === post.uid && (
+          <Link href={`/admin/${post.slug}`}>
+            <button className="btn-blue">Edit Post</button>
+          </Link>
+        )}
       </aside>
     </main>
   );

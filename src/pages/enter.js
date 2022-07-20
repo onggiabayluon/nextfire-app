@@ -4,6 +4,7 @@ import { UserContext } from "~/lib/context";
 import { auth, googleAuthProvider, firestore } from "~/lib/firebase";
 import debounce from "lodash.debounce";
 import UsernameForm from "~/components/UsernameForm";
+import MetaTags from "~/components/MetaTags";
 
 function EnterPage() {
   const { user, username } = useContext(UserContext);
@@ -13,6 +14,7 @@ function EnterPage() {
   // 3. user signed in, has username <SignOutButton />
   return (
     <main>
+      <MetaTags title="Sign in" />
       {user ? (
         !username ? (
           <UsernameForm />
