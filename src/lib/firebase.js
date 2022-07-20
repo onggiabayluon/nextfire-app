@@ -3,15 +3,14 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 import "firebase/compat/storage";
 // v9 compat packages are API compatible with v8 code
-
 const firebaseConfig = {
-  apiKey: "AIzaSyAc0ZuCvRy9A0ZCxOH8bv3KZIxY4Lw9FCk",
-  authDomain: "nextfire-17c57.firebaseapp.com",
-  projectId: "nextfire-17c57",
-  storageBucket: "nextfire-17c57.appspot.com",
-  messagingSenderId: "1013225098009",
-  appId: "1:1013225098009:web:8df6cd3cc414610e41d388",
-  measurementId: "G-FMBEBM66DK",
+  apiKey: process.env.APIKEY,
+  authDomain: process.env.AUTHDOMAIN,
+  projectId: process.env.PROJECTID,
+  storageBucket: process.env.STORAGEBUCKET,
+  messagingSenderId: process.env.MESSAGINGSENDERID,
+  appId: process.env.APPID,
+  measurementId: process.env.MEASUREMENTID,
 };
 
 if (!firebase.apps.length) {
