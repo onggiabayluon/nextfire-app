@@ -22,4 +22,4 @@ function Metatags({
   );
 }
 
-export default memo(Metatags);
+export default Metatags;
